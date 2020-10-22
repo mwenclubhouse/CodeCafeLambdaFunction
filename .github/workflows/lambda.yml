@@ -1,0 +1,21 @@
+name: CodeCaffe Lambda Function
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Publish SNS Topic
+        uses: nothingaline/sns-publish-topic@1.6
+        with:
+          MESSAGE: "message"
+          TOPIC_ARN: $ {{ secrets.SNS_TOPIC }}
+        env: 
+          AWS_REGION: "us-east-1"
+          AWS_ACCESS_KEY_ID: $ {{ secrets.ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: $ {{ secrets.SECRET_ACCESS_KEY }}
+    
