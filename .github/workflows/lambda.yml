@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Publish SNS Topic
-        uses: nothingaline/sns-publish-topic@1.6
+        uses: nothingalike/sns-publish-topic@v1.7
         with:
           MESSAGE: "message"
           TOPIC_ARN: $ {{ secrets.SNS_TOPIC }}
