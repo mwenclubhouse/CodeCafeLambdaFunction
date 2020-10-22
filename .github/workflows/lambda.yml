@@ -9,13 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: "Configure AWS Credentials"
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: us-east-1
       - name: Publish SNS Topic
         uses: nothingalike/sns-publish-topic@v1.7
         with:
           MESSAGE: "message"
           TOPIC_ARN: $ {{ secrets.SNS_TOPIC }}
         env: 
-          AWS_REGION: "us-east-1"
+          AWS_REGION: us-east-1
           AWS_ACCESS_KEY_ID: $ {{ secrets.ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: $ {{ secrets.SECRET_ACCESS_KEY }}
     
